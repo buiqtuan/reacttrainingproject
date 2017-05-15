@@ -3,6 +3,7 @@
   <head>
     <title>Redux basic example</title>
     <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+    <script src="reducers/index.js"></script>
   </head>
   <body>
     <div>
@@ -24,23 +25,23 @@
       document.getElementById('decrement')
         .addEventListener('click', function () {
             //valueEl.innerHTML = valueEl.innerHTML - 1;
-            store.dispatch(decrement);
+            store.dispatch(decrease());
         });
       document.getElementById('incrementAsync')
         .addEventListener('click', function () {
           setTimeout(
             function increment () {
               //valueEl.innerHTML = parseInt(valueEl.innerHTML) + 1;
-              store.dispatch(increment);
+              store.dispatch(increase());
             }
           , 1000); // execute increment () method after 1000 millisecond or 1 second
         });
       document.getElementById('btnSum')
         .addEventListener('click',() => {
-            store.dispatch(sum);
+            store.dispatch(sumup());
         });
     </script>
-    <script src="actions/index.js"/>
-    <script src="index.js"/>
+    <script src="index.js"></script>
+    <script src="actions/index.js"/></script>
   </body>
 </html>

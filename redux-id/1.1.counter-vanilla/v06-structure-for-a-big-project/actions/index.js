@@ -1,11 +1,11 @@
-var drecrement = function () {
+var decrease = function () {
     return {type : 'DECREMENT'};
 };
 
-var increment = function() { 
+var increase = function() { 
     return {type : 'INCREMENT'};
 };
 
-var sum = function() {
+var sumup = function() {
     return {type : 'SUM'};
 };
