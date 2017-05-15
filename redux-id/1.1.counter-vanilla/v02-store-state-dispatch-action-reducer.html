@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Redux basic example</title>
+    <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <p>
+        Clicked: <span id="value">0</span> times
+        <button id="decrement">Decrease</button>
+        <button id="incrementAsync">Increment async</button>
+      </p>
+      <p>
+        <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="varA"></input>
+        +
+        <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="varB"></input>
+        =
+        <span id="sumDisplay"></span>
+        <button id="btnSum">Sum</button>
+      </p>
+    </div>
+    <script>
+      var store = Redux.createStore(counter);
+      var valueEl = document.getElementById('value');
+      var valueSum = document.getElementById('sumDisplay');
+      function render() {
+        //valueEl.innerHTML = 0;
+        valueEl.innerHTML = store.getState().count;
+        valueSum.innerHTML = store.getState().sum;
+      }
+      render();
+      store.subscribe(render);
+
+      function counter(currentState,action) {
+        var DEFAULT_STATE = { count : 0, sum : 0};
+        var nextState = Object.assign({}, currentState);
+        if (currentState === undefined) {
+            nextState = DEFAULT_STATE;
+            return nextState;
+        }
+
+        switch (action.type) {
+            case 'DECREMENT':
+                nextState.count = currentState.count - 1;
+                return nextState;
+            case 'INCREMENT':
+                nextState.count = currentState.count + 1;
+            case 'SUM':
+                var a = parseInt(document.getElementById('varA').value,10);
+                var b = parseInt(document.getElementById('varB').value,10);
+                nextState.sum = a + b;
+            default :
+                return nextState;
+        }
+      }
+
+      document.getElementById('decrement')
+        .addEventListener('click', function () {
+            //valueEl.innerHTML = valueEl.innerHTML - 1;
+            var action = {type : 'DECREMENT'};
+            store.dispatch(action);
+        });
+      document.getElementById('incrementAsync')
+        .addEventListener('click', function () {
+          setTimeout(
+            function increment () {
+              //valueEl.innerHTML = parseInt(valueEl.innerHTML) + 1;
+              var action = {type : 'INCREMENT'};
+              store.dispatch(action);
+            }
+          , 1000); // execute increment () method after 1000 millisecond or 1 second
+        });
+      document.getElementById('btnSum')
+        .addEventListener('click',() => {
+            var action = {type : 'SUM'};
+            store.dispatch(action);
+        });
+    </script>
+  </body>
+</html>
