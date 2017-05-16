@@ -9,3 +9,10 @@ var increase = function() {
 var sumup = function() {
     return {type : 'SUM'};
 };
+
+//ASYNC action
+var asyncIncrease = (dispatch, state) => {
+    fakeServerApi.increaseCount(state.count.result, (data) => {
+        dispatch({ type : 'INCREMENT'});
+    })
+}

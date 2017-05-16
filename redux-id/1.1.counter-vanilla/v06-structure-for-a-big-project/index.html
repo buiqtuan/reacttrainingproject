@@ -4,6 +4,9 @@
     <title>Redux basic example</title>
     <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
     <script src="reducers/index.js"></script>
+    <script src="reducers/sum.js"></script>
+    <script src="reducers/counter.js"></script>
+    <script src="fakeServerApi/index.js"></script>
   </head>
   <body>
     <div>
@@ -29,12 +32,13 @@
         });
       document.getElementById('incrementAsync')
         .addEventListener('click', function () {
-          setTimeout(
-            function increment () {
-              //valueEl.innerHTML = parseInt(valueEl.innerHTML) + 1;
-              store.dispatch(increase());
-            }
-          , 1000); // execute increment () method after 1000 millisecond or 1 second
+          store.dispatch(asyncIncrease);
+          // setTimeout(
+          //   function increment () {
+          //     //valueEl.innerHTML = parseInt(valueEl.innerHTML) + 1;
+          //     store.dispatch(increase());
+          //   }
+          // , 1000); // execute increment () method after 1000 millisecond or 1 second
         });
       document.getElementById('btnSum')
         .addEventListener('click',() => {
